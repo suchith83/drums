@@ -51,7 +51,13 @@ var btns = document.querySelectorAll(".drum");
 for(var i = 0; i < btns.length; i++) {
     btns[i].addEventListener("click", function () {
         var btnInnerHTML = this.innerHTML;
-        makeSound(btnInnerHTML);
+        makeSound2(btnInnerHTML);
+        buttonAnimation(btnInnerHTML);
+    });
+    btns[i].addEventListener("touchstart", function () {
+        event.preventDefault();
+        var btnInnerHTML = this.innerHTML;
+        makeSound2(btnInnerHTML);
         buttonAnimation(btnInnerHTML);
     });
 }
@@ -62,6 +68,23 @@ document.addEventListener("keydown", function(event) {
     makeSound(key);
     buttonAnimation(key);
 });
+
+const soundElements = {
+    w : document.getElementById("w"),
+    a : document.getElementById("a"),
+    s : document.getElementById("s"),
+    d : document.getElementById("d"),
+    j : document.getElementById("j"),
+    k : document.getElementById("k"),
+    l : document.getElementById("l")
+}
+
+function makeSound2(key) {
+    if (soundElements[key]) {
+        const clonedAudio = soundElements[key].cloneNode();
+        clonedAudio.play();
+    }
+}
 
 // Detecting keyboard press
 function makeSound(key) {
